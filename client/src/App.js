@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Solutions from './pages/Solutions';
 import XSS from './pages/XSS';
 import './style.css';
+import Profile from './pages/IDOR';
 
 const App = () => (
   <Router>
@@ -16,6 +17,7 @@ const App = () => (
         <Route path="/login" element={<Login />} />
         <Route path="/solutions" element={<Solutions />} />
         <Route path="/xss" element={<XSS />} />
+        <Route path="/profile/:userId" element={<Profile />} />
       </Routes>
     </div>
   </Router>

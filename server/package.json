@@ -1,8 +1,12 @@
 {
+  "scripts": {
+    "start": "nodemon index.js"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "mysql": "^2.18.1",
-    "node": "^23.11.0"
+    "node": "^23.11.0",
+    "nodemon": "^3.1.9"
   }
 }

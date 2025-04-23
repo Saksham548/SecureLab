@@ -20,24 +20,26 @@ db.connect((err) => {
   console.log("Connected to database");
 });
 
+// Vulnerable login route with SQL injection (intentionally insecure)
 app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-    const query = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
-    
-    console.log('Executing query:', query); // Add this line for debugging
-  
-    db.query(query, (err, result) => {
-      if (err) {
-        console.error('DB Error:', err); // Log the error details
-        return res.status(500).send('Database error');
-      }
-      if (result.length > 0) {
-        res.send('Login successful');
-      } else {
-        res.status(401).send('Invalid credentials');
-      }
-    });
+  const { username, password } = req.body;
+  const query = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
+  console.log('Executing query:', query);
+
+  db.query(query, (err, result) => {
+    if (err) {
+      console.error('Database error:', err);
+      return res.status(500).send('Database error');
+    }
+    if (result.length > 0) {
+      // ✅ Send userId to frontend
+      res.json({ message: 'Login successful', userId: result[0].id });
+    } else {
+      res.status(401).send('Invalid credentials');
+    }
   });
+});
+
   
 
 // Cross-Site Scripting (XSS) vulnerability
@@ -62,6 +64,29 @@ app.post('/comment', (req, res) => {
     });
   });
   
+  app.get('/profile/:userId', (req, res) => {
+    const { userId } = req.params;  // Get userId from URL
+  
+    // Ensure that the userId is valid
+    console.log(`Fetching profile for userId: ${userId}`);
+    
+    const query = `SELECT * FROM users WHERE id = ${mysql.escape(userId)}`;
+    
+    db.query(query, (err, result) => {
+      if (err) {
+        console.error('Database error:', err);
+        return res.status(500).send('Database error');
+      }
+  
+      if (result.length === 0) {
+        console.log('User not found');
+        return res.status(404).send('User not found');
+      }
+  
+      console.log('User data:', result[0]);
+      res.json(result[0]);  // Send back user data
+    });
+  });
   
   
 

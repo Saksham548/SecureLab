@@ -57,4 +57,41 @@ body {
   ul li {
     margin-bottom: 0.5rem;
   }
+
+  .profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background-color: #f0f2f5;
+    padding: 20px;
+  }
+  
+  .profile-card {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .profile-title {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .profile-details p {
+    font-size: 16px;
+    margin: 8px 0;
+    color: #444;
+  }
+  
+  .loading {
+    text-align: center;
+    color: #999;
+  }
+  
   
