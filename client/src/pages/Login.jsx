@@ -16,8 +16,8 @@ const Login = () => {
 
     try {
       const res = await axios.post('http://localhost:5000/login', formData);
-      const { userId } = res.data; // expect backend to send back the userId
-      navigate(`/profile/${userId}`); // ✅ Redirect to profile page
+      const { userId } = res.data; 
+      navigate(`/profile/${userId}`); 
     } catch (err) {
       setError('Invalid credentials or database error');
     }
